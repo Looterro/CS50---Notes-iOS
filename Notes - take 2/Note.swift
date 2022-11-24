@@ -10,7 +10,8 @@ import SQLite3
 
 struct Note {
     let id: Int
-    let contents: String
+    //make sure contents are mutable
+    var contents: String
 }
 
 //Handling all the actions regarding notes
@@ -119,6 +120,28 @@ class NoteManager {
         
         sqlite3_finalize(statement)
         return result
+        
+    }
+    
+    //function to save notes, with the parameter of the note we want to save
+    func save(note: Note) {
+        connect()
+        var statement: OpaquePointer!
+        
+        if sqlite3_prepare_v2(database, "UPDATE notes SET contents = ? WHERE rowid = ?", -1, &statement, nil) != SQLITE_OK {
+            print("Error creating update statement")
+        }
+        
+        //In order to populate the data in places with "?"(bind the data to the query) use sqlite3_bind_text, its important to remember its a 1-indexed list! (Doesnt start from 0). In third parameter you convert swift string to query string
+        sqlite3_bind_text(statement, 1, NSString(string: note.contents).utf8String, -1, nil)
+        //bind the other argument with an id
+        sqlite3_bind_int(statement, 2, Int32(note.id))
+        
+        if sqlite3_step(statement) != SQLITE_DONE {
+            print("Error running update")
+        }
+        
+        sqlite3_finalize(statement)
         
     }
     

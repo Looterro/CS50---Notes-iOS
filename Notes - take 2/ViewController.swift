@@ -18,6 +18,12 @@ class ViewController: UITableViewController {
         reload()
     }
     
+    //on open of this view of the app fetch all the new data
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reload()
+    }
+    
     //Setup the cells in tableview controller, using number of sections, rows and setting up reusable cells
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -40,6 +46,21 @@ class ViewController: UITableViewController {
         notes = NoteManager.main.getAllNotes()
         
         self.tableView.reloadData()
+    }
+    
+    //Function for applying data when using the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        //Check whether the segue identifier matches the requirements, and then whether its noteViewController
+        if segue.identifier ==  "NoteSegue" {
+            if let destination = segue.destination as? NoteViewController {
+                
+                //pass over the note data to destination(NoteViewController)
+                destination.note = notes[tableView.indexPathForSelectedRow!.row]
+                
+            }
+        }
+        
     }
     
 }

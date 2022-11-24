@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,6 +33,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="skU-nA-JxW" kind="show" identifier="NoteSegue" id="WAF-dz-XPm"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -50,6 +54,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cbd-pU-zEq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="814.50381679389307" y="5.6338028169014089"/>
+        </scene>
+        <!--Note View Controller-->
+        <scene sceneID="idW-Zf-h2x">
+            <objects>
+                <viewController id="skU-nA-JxW" customClass="NoteViewController" customModule="Notes___take_2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IM1-Uo-uGt">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QH1-Iw-d0B">
+                                <rect key="frame" x="16" y="103" width="361" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Urm-2r-83x"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="QH1-Iw-d0B" firstAttribute="bottom" secondItem="Urm-2r-83x" secondAttribute="bottom" id="Q7F-RA-7xB"/>
+                            <constraint firstItem="Urm-2r-83x" firstAttribute="trailing" secondItem="QH1-Iw-d0B" secondAttribute="trailing" constant="16" id="YEs-bn-3dt"/>
+                            <constraint firstItem="QH1-Iw-d0B" firstAttribute="leading" secondItem="Urm-2r-83x" secondAttribute="leading" constant="16" id="ZU5-2c-Yhf"/>
+                            <constraint firstItem="QH1-Iw-d0B" firstAttribute="top" secondItem="Urm-2r-83x" secondAttribute="top" id="mb8-Qy-66V"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="4t3-2X-Wb5"/>
+                    <connections>
+                        <outlet property="textView" destination="QH1-Iw-d0B" id="qnn-2H-0sZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t5K-1C-dJf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1722.9007633587785" y="5.6338028169014089"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="oHC-CE-qCo">
@@ -71,6 +109,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
