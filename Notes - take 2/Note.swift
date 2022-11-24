@@ -19,6 +19,13 @@ class NoteManager {
     //Reference to the database, making opening the file faster, since connecting by itself is slow
     var database: OpaquePointer!
     
+    //Create a SINGLETON, meaning this class will be created only one instance of it. Variable main allows this class to reference itself, static keyword allows for accessing this property without an instance
+    static let main = NoteManager()
+    
+    //Protect against anyone else instantiating your class. When working with other people or creating an API this is specifically useful to make sure there are no more NoteManagers than this one
+    private init() {
+    }
+    
     //Get a path somewhere in files to safely read and save files
     func connect() {
         
@@ -31,7 +38,7 @@ class NoteManager {
         do {
             
             //create a path notes.sqlite in user File manager
-            let databaseURL = try FileManager.default.url(for: .userDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("notes.sqlite3")
+            let databaseURL = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("notes.sqlite3")
             
             //check if data works by using the commands - open sqlite, first argument is the file we want to open and then the second is the reference, the pointer to the path
             if sqlite3_open(databaseURL.path, &database) == SQLITE_OK {
@@ -63,7 +70,7 @@ class NoteManager {
         var statement: OpaquePointer!
         
         //After connecting to the file, prepare, execute and finalize the query, "&" is necessary to enable function to use pointer
-        if sqlite3_prepare_v2(database, "INSERT INTO notes (contents) VALUES ('New note')", -1, &statement, nil) != SQLITE_DONE {
+        if sqlite3_prepare_v2(database, "INSERT INTO notes (contents) VALUES ('New note')", -1, &statement, nil) != SQLITE_OK {
             
             print("Could not create query")
             //return -1 so that system knows it couldnt create the note

@@ -10,7 +10,7 @@
         <!--Notes-->
         <scene sceneID="li5-OC-0mQ">
             <objects>
-                <tableViewController id="RxD-cK-Rg5" sceneMemberID="viewController">
+                <tableViewController id="RxD-cK-Rg5" customClass="ViewController" customModule="Notes___take_2" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="WhZ-hm-EGl">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,7 +39,13 @@
                             <outlet property="delegate" destination="RxD-cK-Rg5" id="ICa-m9-Ncj"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Notes" id="jcN-ne-oPT"/>
+                    <navigationItem key="navigationItem" title="Notes" id="jcN-ne-oPT">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="im4-pb-rZv">
+                            <connections>
+                                <action selector="createNote" destination="RxD-cK-Rg5" id="fcK-ds-UKn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cbd-pU-zEq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
